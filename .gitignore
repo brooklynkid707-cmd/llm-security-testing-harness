@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Generated reports (keep the committed examples)
+reports/*
+!reports/.gitkeep
+!reports/example-mock-vulnerable.md
+!reports/example-mock-vulnerable.html
+!reports/example-mock-vulnerable.json
+!reports/example-mock-hardened.md
+!reports/example-mock-hardened.html
+!reports/example-mock-hardened.json
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Never commit secrets
+.env
+*.key

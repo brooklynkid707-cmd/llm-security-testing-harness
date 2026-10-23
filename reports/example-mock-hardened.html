@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>llmsec report - mock-hardened</title>
+<style>
+:root{--bg:#0f1420;--panel:#171e2e;--ink:#e6ebf5;--muted:#9aa7bd;--line:#273149;--accent:#4da3ff;
+--crit:#ff5c6c;--high:#ff9f43;--med:#ffd166;--low:#4dd4ac;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;padding:24px;}
+h1{font-size:22px;margin:0 0 4px} h2{font-size:17px;margin:28px 0 10px;color:var(--accent)}
+.sub{color:var(--muted);font-size:13px}
+.cards{display:flex;flex-wrap:wrap;gap:12px;margin:18px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 18px;min-width:150px}
+.card .big{font-size:26px;font-weight:700}
+.card .lbl{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.badge{display:inline-block;padding:3px 10px;border-radius:999px;font-weight:700;font-size:12px}
+.badge.CRITICAL{background:var(--crit);color:#2a0008} .badge.HIGH{background:var(--high);color:#3a1f00}
+.badge.MEDIUM{background:var(--med);color:#3a3000} .badge.LOW{background:var(--low);color:#003026}
+.badge.NONE{background:#3a4660;color:#cdd6ea}
+table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:8px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top;font-size:13px}
+th{background:#1d2740;color:var(--muted);text-transform:uppercase;font-size:11px;letter-spacing:.04em}
+td.num{text-align:right;white-space:nowrap}
+.bar{position:relative;background:#223;border-radius:6px;height:18px;min-width:120px}
+.bar span{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#4da3ff,#ff5c6c);border-radius:6px}
+.bar em{position:relative;font-style:normal;font-size:11px;padding-left:6px;line-height:18px}
+code{background:#0c1120;padding:1px 5px;border-radius:4px;font-size:12px}
+.sev{padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700;text-transform:uppercase}
+.sev.critical{background:var(--crit);color:#2a0008} .sev.high{background:var(--high);color:#3a1f00}
+.sev.medium{background:var(--med);color:#3a3000} .sev.low{background:var(--low);color:#003026}
+footer{color:var(--muted);font-size:12px;margin-top:28px}
+</style></head><body>
+<h1>LLM Security Testing Harness - report</h1>
+<div class="sub">Target <code>mock-hardened</code> &middot; 2026-10-23T16:41:05+00:00 &middot; harness 1.0.0 &middot; authorized testing only</div>
+<div class="cards">
+  <div class="card"><div class="lbl">Cases</div><div class="big">61</div></div>
+  <div class="card"><div class="lbl">Succeeded</div><div class="big">0</div></div>
+  <div class="card"><div class="lbl">Attack success rate</div><div class="big">0.0%</div></div>
+  <div class="card"><div class="lbl">Risk score</div><div class="big">0<span style="font-size:14px">/100</span></div>
+    <div><span class="badge NONE">NONE</span></div></div>
+</div>
+<h2>Attack success rate by OWASP LLM category</h2>
+<table><thead><tr><th>Category</th><th>Title</th><th>Cases</th><th>Hit</th><th>ASR</th></tr></thead>
+<tbody><tr><td>LLM01</td><td>Prompt Injection</td><td class='num'>18</td><td class='num'>0</td><td class='num'><div class='bar'><span style='width:0%'></span><em>0%</em></div></td></tr>
+<tr><td>LLM02</td><td>Insecure Output Handling</td><td class='num'>9</td><td class='num'>0</td><td class='num'><div class='bar'><span style='width:0%'></span><em>0%</em></div></td></tr>
+<tr><td>LLM06</td><td>Sensitive Information Disclosure</td><td class='num'>12</td><td class='num'>0</td><td class='num'><div class='bar'><span style='width:0%'></span><em>0%</em></div></td></tr>
+<tr><td>LLM07</td><td>Insecure Plugin Design</td><td class='num'>7</td><td class='num'>0</td><td class='num'><div class='bar'><span style='width:0%'></span><em>0%</em></div></td></tr>
+<tr><td>LLM08</td><td>Excessive Agency</td><td class='num'>7</td><td class='num'>0</td><td class='num'><div class='bar'><span style='width:0%'></span><em>0%</em></div></td></tr>
+<tr><td>LLM09</td><td>Overreliance</td><td class='num'>8</td><td class='num'>0</td><td class='num'><div class='bar'><span style='width:0%'></span><em>0%</em></div></td></tr></tbody></table>
+<h2>Remediation (OWASP LLM Top 10 &amp; MITRE ATLAS)</h2>
+<table><thead><tr><th>Category</th><th>ASR</th><th>MITRE ATLAS</th><th>Remediation</th></tr></thead>
+<tbody><tr><td>LLM01 Prompt Injection</td><td class='num'>0%</td><td>AML.T0051.000 LLM Prompt Injection: Direct AML.T0051.001 LLM Prompt Injection: Indirect AML.T0054 LLM Jailbreak</td><td>Enforce an instruction hierarchy: treat retrieved documents and tool output as untrusted data, never as instructions. Add an input classifier for injection phrasing (including decoded base64/leetspeak), constrain the model with a narrow task prompt, and require human approval for consequential actions. Keep privileged data out of the context window entirely.</td></tr>
+<tr><td>LLM02 Insecure Output Handling</td><td class='num'>0%</td><td>AML.T0051.001 LLM Prompt Injection: Indirect AML.T0048 External Harms</td><td>Treat model output like any untrusted user input: HTML-encode before rendering, strip or sandbox active content (script, event handlers, javascript: URLs), block Markdown images pointing at external hosts, and never pass output to an interpreter without validation.</td></tr>
+<tr><td>LLM06 Sensitive Information Disclosure</td><td class='num'>0%</td><td>AML.T0057 LLM Data Leakage AML.T0056 LLM Meta Prompt Extraction</td><td>Do not place secrets in prompts; fetch them server-side at call time. Plant a canary token in the system prompt and filter responses that contain it. Apply output DLP for key/credential patterns and minimise the data placed in context to what the task requires.</td></tr>
+<tr><td>LLM07 Insecure Plugin Design</td><td class='num'>0%</td><td>AML.T0053 LLM Plugin Compromise</td><td>Give every tool a strict typed schema, validate parameters server-side, apply least privilege per tool, maintain an explicit allowlist of callable tools per deployment, and log every call.</td></tr>
+<tr><td>LLM08 Excessive Agency</td><td class='num'>0%</td><td>AML.T0053 LLM Plugin Compromise AML.T0048 External Harms</td><td>Limit tools to the minimum, scope data access to the authenticated user, redact fields the task does not need, and require explicit human confirmation for irreversible or financial actions.</td></tr>
+<tr><td>LLM09 Overreliance</td><td class='num'>0%</td><td>AML.T0062 Discover LLM Hallucinations</td><td>Ground answers in a verified knowledge source and instruct the model to say when a fact is not available. Surface citations, show confidence, and add human review for decisions with impact.</td></tr></tbody></table>
+<h2>Findings (successful attacks)</h2>
+<table><thead><tr><th>Severity</th><th>ID</th><th>Technique</th><th>ATLAS</th><th>Case</th></tr></thead>
+<tbody><tr><td colspan='5'>No attacks succeeded.</td></tr></tbody></table>
+<footer>Generated by llmsec. All targets and data are synthetic; goals are benign and measurable. See SCOPE.md.</footer>
+</body></html>
